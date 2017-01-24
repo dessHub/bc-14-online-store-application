@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="stores">
+
+
+    <div class="row">
+     <div class="col-sm-offset-2 col-sm-7">
+       <form>
+       <div class="form-group">
+         <label class="control-label col-sm-2" for="title">Store Title:</label>
+         <div class="col-sm-10">
+           <input type="text" class="form-control" id="title" placeholder="Enter Store Title">
+         </div>
+       </div><br><br>
+       <div class="form-group">
+         <label class="control-label col-sm-2" for="description">Description:</label>
+         <div class="col-sm-10">
+           <input type="text" class="form-control" id="description" placeholder="Enter Store Description">
+         </div>
+       </div><br><br>
+       <div class="form-group">
+         <div class="col-sm-offset-4 col-sm-2">
+           <button type="submit" class="btn btn-success">Create</button>
+         </div>
+         <div class="col-sm-6">
+           <a href="/store">Already have a store</a>
+         </div>
+       </div>
+     </form>
+
+     </div>
+   </div>
+
+    <hr>
+  </div>
+
+{% endblock %}
