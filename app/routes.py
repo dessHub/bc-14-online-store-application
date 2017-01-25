@@ -1,22 +1,18 @@
-from flask import render_template, redirect, url_for
-from app import app
-from forms import StoreForm
-from document import Store
+from flask import render_template, redirect, url_for, request, flash, jsonify
+from app import db
+from mongoalchemy.session import Session
+from app import app,login_manager
+from forms import StoreForm, RegistrationForm
+from document import Store, User
+session = Session.connect('store_collection')
+#session.clear_collection(User)
 
 @app.route('/')                   #Route to return landing page(index page)
-def index(page=1):
+def index():
     title = u'Stores list'
-    stores = Store.query.paginate(page=page, per_page=5)
+    stores = session.query(Store).all()
 
     return render_template('index.html', stores=stores, title=title)
-
-@app.route('/login')
-def login():
-    return render_template('login.html')
-
-@app.route('/signup')
-def signup():
-    return render_template('sign_up.html')
 
 @app.route('/store_form')
 def store_form():
@@ -24,9 +20,17 @@ def store_form():
 
 @app.route('/store')
 def store():
-    return render_template('store.html')
+    title = u'Users list'
+    users = session.query(User).all()
+    #users = User.query.filter()
+    userObj = session.query(User).filter(User.email == "info@mailu.com")
 
-@app.route('/api/new', methods=['GET', 'POST'])
+    print userObj
+    for user in users:
+        print user, user.username
+    return render_template('store.html', users=users ,title=title)
+
+@app.route('/store/new', methods=['GET', 'POST'])
 def new_store():
     form = StoreForm()
     if form.validate_on_submit():
