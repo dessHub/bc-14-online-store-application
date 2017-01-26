@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+  <div class="col-sm-offset-3 col-sm-6">
+    <div class="panel panel-info">
+      <div class="panel-heading">Sign Up Here</div>
+      <div class="panel-content">
+        <form action="/user/new" method="POST" name="form">
+            <div class="col-md-4 col-md-offset-4">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <label class="control-label" for="first_name">First Name</label>
+                    {{ form.first_name }}
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="last_name">Last Name</label>
+                    {{ form.last_name }}
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="username">Username</label>
+                    {{ form.username }}
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="email">Email</label>
+                    {{ form.email }}
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="password">Password</label>
+                    {{ form.password }}
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="confirm">Confirm</label>
+                    {{ form.confirm }}
+                </div>
+                <button class="btn btn-default" type="submit">Submit</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

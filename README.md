@@ -1,1 +1,0 @@
-# bc-14-online-store-application

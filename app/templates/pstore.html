@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">
+     <div class="jumbotron">
+     <div class="row">
+      <div class="col-sm-offset-2 col-sm-8">
+        {%if store %}
+       <h1>{{ store.title }}</h1>
+       <p>{{ store.description}}</p>
+       {% else%}
+       <h1>You do not have a store </h1>
+       <div><a href="store/new">Create A store</a></div>
+       {% endif %}
+      </div>
+     </div>
+     </div>
+     <hr>
+    <div class="row">
+      {%for item in products%}
+     <div class="col-sm-3">
+       <h3>{{ item.title }}</h3>
+       <h4>{{ item.description }}</h4>
+       <button type="button" class="btn btn-sm btn-warning">Update</button>
+       <button type="button" class="btn btn-sm btn-danger">Delete</button>
+     </div>
+      {% endfor%}
+   </div>
+    <hr>
+  </div>
+
+{% endblock %}

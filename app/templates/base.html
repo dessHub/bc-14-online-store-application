@@ -1,40 +1,58 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+    <head>
+        {% if title %}
+        <title>{{ title }}</title>
+        {% else %}
+        <title>MyBlog</title>
+        {% endif %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/sandstone/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/css/styles.css" rel="stylesheet">
+        <style type="text/css"></style>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        {% block head %}{% endblock %}
+    </head>
+    <body >
 
-   <title>Online Store</title>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ url_for('home')}}">WebStarStore</a>
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="/static/css/styles.css" rel="stylesheet">
-
-  </head>
-  <body>
-    <div class="container">
-
-      <div class="header" >
-        <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/">StarOnlineStore</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="/">Home</a></li>
-      <li><a href="/store/new">Create Stores</a></li>
-      <li><a href="/store">Blog</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="/user/new"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    </ul>
-  </div>
-</nav>
-    </div>
-
-     {% block content %} {% endblock %}
-    </div>
-
-  </body>
+                      </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                  <ul class="nav navbar-nav navbar-left">
+                      {% if current_user.is_authenticated() %}
+                          <li><a href="/view/pstore">Store</a></li>
+                          <li><a href="/product/new">Add Product</a></li>
+                          <li><a href="/store/new">Create Store</a></li>
+                          <li><a href="">About Us</a></li>
+                          <li><a href="">Blog</a></li>
+                      {% else %}
+                          <li><a href="/store/new">Create Store</a></li>
+                          <li><a href="">About Us</a></li>
+                          <li><a href="">Blog</a></li>
+                      {% endif %}
+                  </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if current_user.is_authenticated() %}
+                            <li>{{current_user.get_id()}}</li>
+                            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                        {% else %}
+                            <li><a href="{{ url_for('login') }}">Login</a></li>
+                            <li><a href="/user/new">Sign Up</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            {% include "flash.html" %}
+            {% block content %}{% endblock %}
+        </div>
+    </body>
 </html>

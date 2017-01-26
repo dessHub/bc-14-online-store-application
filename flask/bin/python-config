@@ -1,4 +1,4 @@
-#!/home/desmond/myProjects/bootcampxiv/bc-14-online-store-application/flask/bin/python
+#!/home/desmond/myProjects/bootcampxiv/bc-14/flask/bin/python
 
 import sys
 import getopt
